@@ -27,16 +27,16 @@ SOFTWARE.
 #include <stdbool.h>
 
 enum main_menu{
-    ADD_MAIN_MENU=1,
+    INSERT_MAIN_MENU=1,
     DISPLAY_MAIN_MENU,
     EXIT_MAIN_MENU
 };
 
-enum add_menu{
-    ADD_AT_START=1,
-    ADD_AT_POS,
-    ADD_AT_END,
-    EXIT_ADD_MENU
+enum insert_menu{
+    INSERT_AT_START=1,
+    INSERT_AT_POS,
+    INSERT_AT_END,
+    EXIT_INSERT_MENU
 };
 
 struct node {
@@ -64,7 +64,7 @@ void displayList()
     }
 }
 
-bool addAtStart()
+bool insertAtStart()
 {
     int data = 0;
     struct node* new_node = NULL;
@@ -73,7 +73,7 @@ bool addAtStart()
         printf("Linked list new_node allocation Failed\n");
         return false;
     }
-    printf(" Enter the data to be added: ");
+    printf(" Enter the data to be inserted: ");
     scanf("%d",&data);
     new_node->data = data;
     new_node->next = head;
@@ -81,10 +81,10 @@ bool addAtStart()
     return true;
 }
 
-bool addAtEnd()
+bool insertAtEnd()
 {
     if(!head){
-        if(addAtStart(head)){
+        if(insertAtStart(head)){
             return true;
         }else{
             return false;
@@ -93,7 +93,7 @@ bool addAtEnd()
     int data = 0;
     struct node* cur_node = head;
     struct node* new_node = NULL;
-    printf(" Enter the data to be added: ");
+    printf(" Enter the data to be inserted: ");
     scanf("%d",&data);
     while (cur_node->next!=NULL)
     {
@@ -110,7 +110,7 @@ bool addAtEnd()
     return true;
 }
 
-bool addAtPos()
+bool insertAtPos()
 {
     int data=0,pos=0;
     int cnt=0;
@@ -124,7 +124,7 @@ bool addAtPos()
         return false;
     }
     if(pos==0){
-        if(addAtStart(head)){
+        if(insertAtStart(head)){
             return true;
         }else{
             return false;
@@ -136,13 +136,13 @@ bool addAtPos()
         cnt++;
     }
     if(cnt==pos-1 && cur_node->next==NULL){
-        if(addAtEnd()){
+        if(insertAtEnd()){
             return true;
         }else{
             return false;
         }
     }else if(cnt==pos-1){
-        printf(" Enter the data to be added: ");
+        printf(" Enter the data to be inserted: ");
         scanf("%d",&data);  
         new_node = (struct node*)malloc(sizeof(struct node));
         if(!new_node){
@@ -159,51 +159,51 @@ bool addAtPos()
     return true;
 }
 
-void addNewNode()
+void insertNewNode()
 {
     int option=-1;
     while(true){
-        printf("\nAdd New Node Menu:\
-                \n 1.Add at start \
-                \n 2.Add at position \
-                \n 3.Add at end \
+        printf("\nInsert New Node Menu:\
+                \n 1.Insert at start \
+                \n 2.Insert at position \
+                \n 3.Insert at end \
                 \n 4.Back to main menu \
                 \n Enter your option:");
         scanf("%d",&option);
         
         switch (option)
         {
-        case ADD_AT_START:
-            if(addAtStart()){
-                printf("The data has been added successfully.\n");
+        case INSERT_MAIN_MENU:
+            if(insertAtStart()){
+                printf("The data has been inserted successfully.\n");
                 displayList();
             }else{
-                printf("The data has not been added.\n");
+                printf("The data has not been inserted.\n");
             }
             break;
-        case ADD_AT_POS:
-            if(addAtPos()){
-                printf("The data has been added successfully.\n");
+        case INSERT_AT_POS:
+            if(insertAtPos()){
+                printf("The data has been inserted successfully.\n");
                 displayList();
             }else{
-                printf("The data has not been added.\n");
+                printf("The data has not been inserted.\n");
             }
             break;
-        case ADD_AT_END:
-            if(addAtEnd()){
-                printf("The data has been added successfully.\n");
+        case INSERT_AT_END:
+            if(insertAtEnd()){
+                printf("The data has been inserted successfully.\n");
                 displayList();
             }else{
-                printf("The data has not been added.\n");
+                printf("The data has not been inserted.\n");
             }
             break;
-        case EXIT_ADD_MENU:
+        case EXIT_INSERT_MENU:
             break;
         default:
             printf("Invalid option selected!!");
             break;
         }
-        if(option==EXIT_ADD_MENU){
+        if(option==EXIT_INSERT_MENU){
             break;
         }
     }
@@ -225,15 +225,15 @@ int main(int argc, char const *argv[])
     int option= -1;
     while(true){
         printf("\nLinked List Main Menu:\
-                \n 1.Add New Node \
+                \n 1.Insert New Node \
                 \n 2.Display the List \
                 \n 3.Exit \
                 \n Enter your option:");
         scanf("%d",&option);
         switch (option)
         {
-            case ADD_MAIN_MENU:
-                addNewNode();
+            case INSERT_MAIN_MENU:
+                insertNewNode();
                 break;
             case DISPLAY_MAIN_MENU:
                 displayList();
